@@ -1,4 +1,4 @@
-
+#name: Lizzie
 import unittest
 
 # The Customer class
