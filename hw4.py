@@ -273,9 +273,9 @@ def main():
     #Try all cases in the validate_order function
     #Below you need to have *each customer instance* try the four cases
     #case 1: the cashier does not have the stall 
-    customer1.validate_order(cashier1, 'Vegetables', 'Carrots', 10)
-    customer2.validate_order(cashier1, 'Cheese', 'Mozzarella', 15)
-    customer3.validate_order(cashier2, 'Drinks', 'Water', 100)
+    customer1.validate_order(cashier1, stall3, "Bananas", 10)
+    customer2.validate_order(cashier1, stall3, 'Mozzarella', 15)
+    customer3.validate_order(cashier2, stall3, 'Water', 100)
     
     #case 2: the casher has the stall, but not enough ordered food or the ordered food item
     customer1.validate_order(cashier1, stall1, 'Cheese', 10)
