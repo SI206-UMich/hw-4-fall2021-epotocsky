@@ -1,18 +1,19 @@
-#name: Lizzie
+#name: Lizzie Potocsky
+
+from _typeshed import Self
 import unittest
 
-# The Customer class
-# The Customer class represents a customer who will order from the stalls.
+# The Customer class represents a customer who will order from the stalls.   
 class Customer: 
+    #wallet is a float repping how much money in market payment card 
     # Constructor
-    #wallt is a float repping how much money in market payment card 
     def __init__(self, name, wallet = 100):
         self.name = name
         self.wallet = wallet
 
     # Reload some deposit into the customer's wallet.
     #adds a passed amount to the customer's wallet 
-    def reload_money(self,deposit):
+    def reload_money(self, deposit):
         self.wallet += deposit
 
     # The customer orders the food and there could be different cases   
@@ -31,7 +32,8 @@ class Customer:
     # Submit_order takes a cashier, a stall and an amount as parameters, 
     # it deducts the amount from the customer’s wallet and calls the receive_payment method on the cashier object
     def submit_order(self, cashier, stall, amount): 
-        pass
+        self.wallet = self.wallet - amount
+        Cashier.receive_payment(self, stall, amount)
 
     # The __str__ method prints the customer's information.    
     def __str__(self):
@@ -80,51 +82,51 @@ class Cashier:
 #cost is the cost to each customer for each food. same cost for all foods in the same stall
 class Stall:
 
-    def __init__(self, name, inventory, earnings = 0, cost = 7):
-        self.
+    def __init__(self, name, inventory = {}, earnings = 0, cost = 7):
+        self.name = name
+        self.inventory =  inventory 
+        self.cost = cost
+        self.earnings = earnings
     
     # method that takes the food name and the quantity. 
     # If the stall has enough food, it will decrease the quantity of that food in the inventory. 
     # Questions for you to think about: should process_order take other actions? If so, add it in your code.
     def process_order(self, name, quantity):
+        if self.inventory[name] >= quantity:
+            self.inventory[name] =- quantity
+        else:
+            self.inventory[name] = self.inventory[name]
 
   
   # method that takes the food name and the quantity and returns True if there is enough food left in the inventory and False otherwise.
 
-    def has_item()
-    pass
+    def has_item(self, name, quantity):
+        if self.inventory[name] >= quantity:
+            return True
+        else:
+            return False
 
 #method that takes the food name and the quantity. 
 # It will add the quantity to the existing quantity if the item exists in the inventory dictionary or create a new item in the inventory dictionary with the item name as the key and the quantity as the value.
-    def stock_up()
+    def stock_up(self, name, quantity):
+        if self.name in self.inventory:
+           self.inventory[name] += quantity
+        else:
+            self.inventory = name
 
 #method that takes the quantity and returns the total for an order. 
 #Since all the foods in one stall have the same cost, you only need to know the quantity of food items that the customer has ordered.
-    def compute_cost()
+    def compute_cost(self, quantity):
+        self.earnings = quantity * self.cost
+        return self.earnings
 
 #a method that returns a string with the information in th instnace variables using
 #the below format
 #“Hello, we are [NAME]. This is the current menu [INVENTORY KEYS AS LIST]. We charge $[COST] per item. We have $[EARNINGS] in total.”
-    def __str__:
+    def __str__(self):
+        return "Hello, we are " + self.name + ". This is the current menu " + self.inventory.keys() + ". We charge $" + self.cost + " per item. We have $" + self.earnings + " in total."
+    
         
-
-
-#create a main method
-# Create at least two inventory dictionaries with at least 3 different types of food. 
-# The dictionary keys are the food items and the values are the quantity for each item.
-#Create at least 3 customer objects. 
-#each should have a unique name and unique amount of money in their wallet
-#create at least 2 stall objects
-#each should have a unique name, inventory (use the inventory that you just created), and cost.
-#create at least 2 cashier objects
-#. Each should have a unique name and directory (a list of stalls).
-#Have each customer place at least one order (by calling validate_order) and try all cases in the validate_order function above. 
-# See starter code for hints of all cases.
-        
-
-
-
-
 
 
 #do not edit test cases besides the ones below
@@ -243,6 +245,37 @@ class TestAllMethods(unittest.TestCase):
 ### Write main function
 def main():
     #Create different objects 
+    # Create at least two inventory dictionaries with at least 3 different types of food. 
+    inv1 = {
+        "Salmon": 5,
+        "Pizza": 6,
+        "Sandwich": 4,
+    }
+    inv2 = {
+        "Sushi": 8,
+        "Bananas": 12,
+        "Pasta": 10,
+    }
+    # The dictionary keys are the food items and the values are the quantity for each item.
+    #Create at least 3 customer objects. 
+    customer1 = ("Lizzie", 500)
+    customer2 = ("Ellie", 4)
+    customer3 = ("Rachel", 150)
+    #each should have a unique name and unique amount of money in their wallet
+    #create at least 2 stall objects
+    stall1 = Stall("Cool Table", inv1, 50)
+    stall2 = Stall("Fun Table", inv2, 10) 
+    #each should have a unique name, inventory (use the inventory that you just created), and cost.
+    #create at least 2 cashier objects
+    #. Each should have a unique name and directory (a list of stalls).
+    directory1 = ["Fish Store", "Pizza Papalis", "Fruit"]
+    directory2 = ["Cool Store", "Weird Store"]
+
+    cashier1 = Cashier("Archie", directory1)
+    cashier2 = Cashier("Josie", directory2)
+    #Have each customer place at least one order (by calling validate_order) and try all cases in the validate_order function above. 
+    Customer.validate_order(self, cashier=cashier1, stall=stall1, item_name="Pizza", quantity=10)
+    # See starter code for hints of all cases.
 
     #Try all cases in the validate_order function
     #Below you need to have *each customer instance* try the four cases
