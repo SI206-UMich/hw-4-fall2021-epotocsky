@@ -5,15 +5,18 @@ import unittest
 # The Customer class represents a customer who will order from the stalls.
 class Customer: 
     # Constructor
+    #wallt is a float repping how much money in market payment card 
     def __init__(self, name, wallet = 100):
         self.name = name
         self.wallet = wallet
 
     # Reload some deposit into the customer's wallet.
+    #adds a passed amount to the customer's wallet 
     def reload_money(self,deposit):
         self.wallet += deposit
 
     # The customer orders the food and there could be different cases   
+    #places an order at that cashier to be delivered to that stall
     def validate_order(self, cashier, stall, item_name, quantity):
         if not(cashier.has_stall(stall)):
             print("Sorry, we don't have that vendor stall. Please try a different one.")
@@ -40,11 +43,12 @@ class Customer:
 class Cashier:
 
     # Constructor
+    #directory is a list of stalls
     def __init__(self, name, directory =[]):
         self.name = name
         self.directory = directory[:] # make a copy of the directory
 
-    # Whether the stall is in the cashier's directory
+    # returns whether the stall is in the cashier's directory
     def has_stall(self, stall):
         return stall in self.directory
 
@@ -59,7 +63,7 @@ class Cashier:
     # Places an order at the stall.
 	# The cashier pays the stall the cost.
 	# The stall processes the order
-	# Function returns cost of the order, using compute_cost method
+	# Function returns cost of the order (quantity times cost), using compute_cost method
     def place_order(self, stall, item, quantity):
         stall.process_order(item, quantity)
         return stall.compute_cost(quantity) 
@@ -69,12 +73,72 @@ class Cashier:
 
         return "Hello, this is the " + self.name + " cashier. We take preloaded market payment cards only. We have " + str(sum([len(category) for category in self.directory.values()])) + " vendors in the farmers' market."
 
-## Complete the Stall class here following the instructions in HW_4_instructions_rubric
+# Complete the Stall class here following the instructions in HW_4_instructions_rubric
+#name is a string that is the name of the stall
+#inventory is a dictionary which holds the names of the food as the keys and quantities of food as values
+#earnings is a float for amount of money the stall currently has
+#cost is the cost to each customer for each food. same cost for all foods in the same stall
 class Stall:
+
+    def __init__(self, name, inventory, earnings = 0, cost = 7):
+        self.
     
+    # method that takes the food name and the quantity. 
+    # If the stall has enough food, it will decrease the quantity of that food in the inventory. 
+    # Questions for you to think about: should process_order take other actions? If so, add it in your code.
+    def process_order(self, name, quantity):
+
+  
+  # method that takes the food name and the quantity and returns True if there is enough food left in the inventory and False otherwise.
+
+    def has_item()
     pass
 
+#method that takes the food name and the quantity. 
+# It will add the quantity to the existing quantity if the item exists in the inventory dictionary or create a new item in the inventory dictionary with the item name as the key and the quantity as the value.
+    def stock_up()
 
+#method that takes the quantity and returns the total for an order. 
+#Since all the foods in one stall have the same cost, you only need to know the quantity of food items that the customer has ordered.
+    def compute_cost()
+
+#a method that returns a string with the information in th instnace variables using
+#the below format
+#“Hello, we are [NAME]. This is the current menu [INVENTORY KEYS AS LIST]. We charge $[COST] per item. We have $[EARNINGS] in total.”
+    def __str__:
+        
+
+
+#create a main method
+# Create at least two inventory dictionaries with at least 3 different types of food. 
+# The dictionary keys are the food items and the values are the quantity for each item.
+#Create at least 3 customer objects. 
+#each should have a unique name and unique amount of money in their wallet
+#create at least 2 stall objects
+#each should have a unique name, inventory (use the inventory that you just created), and cost.
+#create at least 2 cashier objects
+#. Each should have a unique name and directory (a list of stalls).
+#Have each customer place at least one order (by calling validate_order) and try all cases in the validate_order function above. 
+# See starter code for hints of all cases.
+        
+
+
+
+
+
+
+#do not edit test cases besides the ones below
+#test_compute_cost has an error. fix the numbers to make the test pass.
+#test_has_item tests the has_item method in the Stall class. there are 3 scenarios to test. refer to starter code
+#Complete test_validate_order, which tests the validate_order method in the Customer class. 
+# The validate_order method places an order of items from a stall to be carried out by a cashier, but only if several conditions are met: 
+# if the customer has enough money in their wallet to pay for the transaction and if the stall has enough items in stock.
+#when writing tests for test_validate_order, comment each test case describing the scenarios you test
+#ex output
+#Don't have enough money for that :( Please reload more money! 
+# Our stall has run out of [Food Item] :( Please try a different stall! 
+# Sorry, we don't have that vendor stall. Please try a different one!
+#Complete test_reload_money that tests if the customer can add money into their wallet
 class TestAllMethods(unittest.TestCase):
     
     def setUp(self):
